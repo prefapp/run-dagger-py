@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "test-example"
+version = "0.1.0"
+description = ""
+authors = ["Javier Gomez Rodriguez <javier.gomez@prefapp.es>"]
+packages = [{include = "test_example"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+
+[tool.poetry-dagger-plugin.workflows]
+test = "test_example"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
