@@ -1,0 +1,11 @@
+name: ''
+description: ''
+inputs:
+  who-to-greet:
+    description: 'Who to greet'
+    default: 'World'
+runs:
+  using: "composite"
+  steps: 
+    - run: echo Hello NaN.
+      shell: bash
