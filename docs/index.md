@@ -14,11 +14,12 @@ poetry self add git+https://github.com/prefapp/run-dagger-py.git@main#subdirecto
 ```toml
 [tool.poetry-dagger-plugin.workflows]
 test = "test_example"
+test2 = "my_second_workflow"
 ```
 
 The module `run()` method will be invoked, passing the following arguments:
-- vars: `dict()` extracted from the `input.vars` input of the action (using TOML format)
-- secrets: `dict()` extracted from the `input.secrets` input of the action (using TOML format)
-- config_file: string with the path to the config file (if any)
+- `vars`: `dict()` extracted from the `input.vars` input of the action (using TOML format)
+- `secrets`: `dict()` extracted from the `input.secrets` input of the action (using TOML format)
+- `config_file`: string with the path to the config file (if any)
 
-See the example for more details: test-example[examples/test-example]
+See the example for more details: [test-example](examples/test-example)
