@@ -18,11 +18,11 @@ inputs:
     required: true
     default: '3.11'
   vars:
-    description: 'The var arguments to pass to the workflow'
+    description: 'The var arguments to pass to the workflow (in toml format)'
     required: false
     default: ""
   secrets:
-    description: 'The secrets to pass to the workflow'
+    description: 'The secrets to pass to the workflow (in toml format)'
     required: false
     default: ""
 
@@ -48,5 +48,5 @@ runs:
 
     - id: run-dagger
       run: poetry run_dagger --config_file ${{ inputs.config_file }} --secrets='${{ inputs.secrets }}' --args='${{ inputs.args }}' ${{ inputs.workflow }}
-      working-directory: ${{ inputs.workflow_folder }}
+      working-directory: ${{ inputs.working_directory }}
       shell: bash
