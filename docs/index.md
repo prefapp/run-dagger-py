@@ -1,6 +1,6 @@
 # run-dagger-py
 
-This is a composite action to run to prepare the environment and run a dagger workflow, using the Dagger Python SDK.
+This is a composite action to prepare the environment and run a Dagger workflow, using the Dagger Python SDK.
 
 ## Getting started
 
