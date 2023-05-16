@@ -6,7 +6,7 @@ inputs:
     required: true
     default: '.dagger'
   workflow:
-    description: 'The workflow to run'
+    description: 'The workflow script to run, as specified in [tool.poetry.scripts]'
     required: true
     default: 'main'
   config_file:
@@ -17,10 +17,6 @@ inputs:
     description: 'The python version to use'
     required: true
     default: '3.11'
-  poetry_command:
-    description: 'Poetry command to run the workflows (run, run_dagger)'
-    required: false
-    default: 'run_dagger'
   vars:
     description: 'The var arguments to pass to the workflow (in toml format)'
     required: false
@@ -46,12 +42,7 @@ runs:
       working-directory: ${{ inputs.working_directory }}
       shell: bash
 
-    - run: poetry self add ${{ github.action_path }}/poetry-dagger-plugin
-      if: inputs.poetry_command == 'run_dagger'
-      working-directory: ${{ inputs.working_directory }}
-      shell: bash
-
     - id: run-dagger
-      run: poetry ${{ inputs.poetry_command }} --config_file ${{ inputs.config_file }} --secrets='${{ inputs.secrets }}' --args='${{ inputs.args }}' ${{ inputs.workflow }}
+      run: poetry run ${{ inputs.workflow }} --config_file ${{ inputs.config_file }} --secrets='${{ inputs.secrets }}' --args='${{ inputs.args }}'
       working-directory: ${{ inputs.working_directory }}
       shell: bash
