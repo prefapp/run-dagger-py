@@ -42,7 +42,7 @@ runs:
         python-version: '${{ inputs.python_version }}'
         cache: 'poetry'
 
-    - run: poetry install -C ${{ inputs.pyproject_path }}
+    - run: poetry install -C ${{ inputs.pyproject_path }} --with ${{ inputs.workflow }}
       working-directory: ${{ inputs.working_directory }}
       shell: bash
 
