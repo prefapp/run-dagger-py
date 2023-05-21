@@ -38,7 +38,7 @@ runs:
         python-version: '${{ inputs.python_version }}'
         cache: 'poetry'
 
-    - run: poetry install --without=dev
+    - run: poetry install
       working-directory: ${{ inputs.working_directory }}
       shell: bash
 
