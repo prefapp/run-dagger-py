@@ -19,8 +19,9 @@ For a GitHub workflow you can use this action passing the following inputs:
 - `working_directory`: **optional**. Path of the directory, from the GITHUB_WORKSPACE, where this action will be executed. Default to `${{ github.workspace }}`
 - `pyproject_path`: **optional**. Path of the pyproject.toml project,  default="${{ inputs.working_directory}}/.dagger"
 - `vars`: **optional**. Config variables to pass to the workflow, in [Key/Value TOML format](https://toml.io/en/v1.0.0#keyvalue-pair)
-- `secrets`: **optional**. Secrets to pass to the workflow, in [Key/Value TOML format](https://toml.io/en/v1.0.0#keyvalue-pair) 
+- `secrets`: **optional**. Secrets to pass to the workflow, in [Key/Value TOML format](https://toml.io/en/v1.0.0#keyvalue-pair)
 - `config_file`: **optional**. Path of the related workflow config file inside the repository, if any, from the `${{ inputs.working_directory }}`
+- `python_version`: **optional**. Python version to use. Default to `3.11`. **Needs to be >= 3.10**
 
 #### Example
 ```yaml
@@ -37,7 +38,7 @@ For a GitHub workflow you can use this action passing the following inputs:
         uses: actions/checkout@v3
         with:
           path: config
-          
+
       - name: Run build_images firestarter workflow
         uses: prefapp/run-dagger-py@main
         with:
