@@ -15,7 +15,7 @@ See the example for more details: [test-repo-rundagger](https://github.com/prefa
 
 ### Usage
 For a GitHub workflow you can use this action passing the following inputs:
-- `worflow`: **mandatory**. Name of the workflow to run, must match the name of the package (without `firestarter.workflows`)
+- `worflow`: **mandatory**. Name of the workflow to run, must match the name of the package (without the `firestarter.workflows.` prefix), for example: `pr_verify`
 - `working_directory`: **optional**. Path of the directory, from the GITHUB_WORKSPACE, where this action will be executed. Default to `${{ github.workspace }}`
 - `pyproject_path`: **optional**. Path of the pyproject.toml project. Default to `${{ inputs.working_directory}}/.dagger`
 - `vars`: **optional**. Config variables to pass to the workflow, in [Key/Value TOML format](https://toml.io/en/v1.0.0#keyvalue-pair)
