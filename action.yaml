@@ -47,6 +47,6 @@ runs:
       shell: bash
 
     - id: run-dagger
-      run: poetry -C ${{ inputs.pyproject_path }} run firestarter ${{ inputs.workflow }} --config_file ${{ inputs.config_file }} --secrets='${{ inputs.secrets }}' --vars='${{ inputs.vars }}'
+      run: poetry -C ${{ inputs.pyproject_path }} run firestarter ${{ inputs.workflow }}
       working-directory: ${{ inputs.working_directory }}
       shell: bash
