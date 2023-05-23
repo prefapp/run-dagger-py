@@ -3,6 +3,7 @@
 `run-dagger-py` is a composite action to prepare the environment and run a Firestarter workflow, using the Dagger Python SDK.
 
 ## Getting started
+
 ### Pre-requisites
 To use this action to run a Firestarter workflow, you need:
 - A Poetry project with the dependency with firestarter-workflows configured, and an optional dependencies group defined, with the name of the firestarter workflow to launch.
@@ -14,7 +15,9 @@ To use this action to run a Firestarter workflow, you need:
 See the example for more details: [test-repo-rundagger](https://github.com/prefapp/test-repo-rundagger/blob/main/.dagger/pyproject.toml)
 
 ### Usage
+
 For a GitHub workflow you can use this action passing the following inputs:
+
 - `worflow`: **mandatory**. Name of the workflow to run, must match the name of the package (without the `firestarter.workflows.` prefix), for example: `pr_verify`
 - `working_directory`: **optional**. Path of the directory, from the GITHUB_WORKSPACE, where this action will be executed. Default to `${{ github.workspace }}`
 - `pyproject_path`: **optional**. Path of the pyproject.toml project. Default to `${{ inputs.working_directory}}/.dagger`
@@ -24,6 +27,7 @@ For a GitHub workflow you can use this action passing the following inputs:
 - `python_version`: **optional**. Python version to use. Default to `3.11`. **Needs to be >= 3.10**
 
 #### Example
+
 ```yaml
   build-images:
     runs-on: ubuntu-22.04
