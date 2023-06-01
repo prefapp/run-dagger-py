@@ -1,8 +1,0 @@
-site_name: "TechDocs"
-site_description: "Custom documentation"
-
-nav:
-  - Introduction: index.md
-
-plugins:
-  - techdocs-core
