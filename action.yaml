@@ -34,11 +34,12 @@ runs:
   using: "composite"
   steps:
     - uses: actions/setup-python@v5
+      id: setup-python
       with:
         python-version: '${{ inputs.python_version }}'
 
     - name: Install poetry
-      run: pipx install poetry==1.8.2
+      run: pipx install poetry==1.8.2 --python '${{ steps.setup-python.outputs.python-path }}' 
       shell: bash
 
     - run: poetry install -C ${{ inputs.pyproject_path }} --with ${{ inputs.workflow }}
