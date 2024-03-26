@@ -37,10 +37,9 @@ runs:
       run: pipx install poetry==1.8.2
       shell: bash
 
-    - uses: actions/setup-python@v4
+    - uses: actions/setup-python@v5
       with:
         python-version: '${{ inputs.python_version }}'
-        cache: 'poetry'
 
     - run: poetry install -C ${{ inputs.pyproject_path }} --with ${{ inputs.workflow }}
       working-directory: ${{ inputs.working_directory }}
