@@ -45,6 +45,8 @@ runs:
       working-directory: ${{ inputs.working_directory }}
       shell: bash
 
+    - run: poetry env info -C ${{ inputs.pyproject_path }}
+
     - id: run-dagger
       env:
         INPUT_VARS: ${{ inputs.vars }}
