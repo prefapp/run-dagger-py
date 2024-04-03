@@ -40,10 +40,10 @@ runs:
   
     - name: Checkout tools repo
       uses: actions/checkout@v4
-        with:
-          repository: prefapp/firestarter-workflows
-          ref: '${{ inputs.ref }}'
-          path:  ${{ inputs.working_directory }}/firestarter_workflows
+      with:
+        repository: prefapp/firestarter-workflows
+        ref: '${{ inputs.ref }}'
+        path:  ${{ inputs.working_directory }}/firestarter_workflows
   
     - uses: actions/setup-python@v5
       id: setup-python
