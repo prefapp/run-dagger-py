@@ -64,7 +64,7 @@ runs:
       run: pipx install poetry==1.8.2 --python '${{ steps.setup-python.outputs.python-path }}' 
       shell: bash
 
-    - run: poetry install -C ${{ github.workspace }}/firestarter_workflows --with ${{ inputs.workflow }}
+    - run: poetry install -C ${{ github.workspace }}/firestarter_workflows --extras=${{ inputs.workflow }}
       shell: bash
 
     - run: poetry env info -C ${{ github.workspace }}/firestarter_workflows
