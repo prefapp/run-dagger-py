@@ -48,6 +48,7 @@ runs:
     - uses: actions/setup-python@v5
       id: setup-python
       with:
+        cache: 'poetry'
         python-version: '${{ inputs.python_version }}'
 
     - name: Install poetry
