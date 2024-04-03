@@ -44,6 +44,15 @@ runs:
         repository: prefapp/firestarter-workflows
         ref: '${{ inputs.ref }}'
         path:  ${{ inputs.working_directory }}/firestarter_workflows
+        
+    - name: debug
+      run: |
+       ls ${{ inputs.working_directory }}
+       echo "---aaa---"
+       find ${{ inputs.working_directory }}
+       echo "---bbb---"
+       find ${{ github.workspace }}
+
   
     - uses: actions/setup-python@v5
       id: setup-python
