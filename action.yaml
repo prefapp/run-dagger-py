@@ -65,11 +65,9 @@ runs:
       shell: bash
 
     - run: poetry install -C ${{ github.workspace }}/firestarter_workflows --with ${{ inputs.workflow }}
-      working-directory: ${{ inputs.working_directory }}/firestarter_workflows
       shell: bash
 
     - run: poetry env info -C ${{ github.workspace }}/firestarter_workflows
-      working-directory: ${{ inputs.working_directory }}
       shell: bash
 
     - id: run-dagger
@@ -78,5 +76,5 @@ runs:
         INPUT_SECRETS: ${{ inputs.secrets }}
         INPUT_CONFIG_FILE: ${{ inputs.config_file }}
       run: poetry -C ${{ github.workspace }}/firestarter_workflows run firestarter ${{ inputs.workflow }}
-    #  working-directory: ${{ inputs.working_directory }}
+      working-directory: ${{ inputs.working_directory }}
       shell: bash
