@@ -46,6 +46,7 @@ runs:
         path:  ${{ inputs.working_directory }}/firestarter_workflows
         
     - name: debug
+      shell: bash
       run: |
        ls ${{ inputs.working_directory }}
        echo "---aaa---"
