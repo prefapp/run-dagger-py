@@ -78,5 +78,5 @@ runs:
         INPUT_SECRETS: ${{ inputs.secrets }}
         INPUT_CONFIG_FILE: ${{ inputs.config_file }}
       run: poetry -C ${{ github.workspace }}/firestarter_workflows run firestarter ${{ inputs.workflow }}
-      working-directory: ${{ inputs.working_directory }}
+    #  working-directory: ${{ inputs.working_directory }}
       shell: bash
