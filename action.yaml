@@ -29,10 +29,22 @@ inputs:
     description: 'The secrets to pass to the workflow (in toml format)'
     required: false
     default: ""
+  ref:
+    description: 'prefapp/firestarter-workflows repository ref'
+    required: true
+    default: 'main'
 
 runs:
   using: "composite"
   steps:
+  
+    - name: Checkout tools repo
+      uses: actions/checkout@v4
+      with:
+        repository: prefapp/firestarter-workflows
+        ref: '${{ inputs.ref }}'
+        path: firestarter_workflows
+  
     - uses: actions/setup-python@v5
       id: setup-python
       with:
@@ -42,12 +54,10 @@ runs:
       run: pipx install poetry==1.8.2 --python '${{ steps.setup-python.outputs.python-path }}' 
       shell: bash
 
-    - run: poetry install -C ${{ inputs.pyproject_path }} --with ${{ inputs.workflow }}
-      working-directory: ${{ inputs.working_directory }}
+    - run: poetry install -C ${{ github.workspace }}/firestarter_workflows --extras=${{ inputs.workflow }}
       shell: bash
 
-    - run: poetry env info -C ${{ inputs.pyproject_path }}
-      working-directory: ${{ inputs.working_directory }}
+    - run: poetry env info -C ${{ github.workspace }}/firestarter_workflows
       shell: bash
 
     - id: run-dagger
@@ -55,6 +65,6 @@ runs:
         INPUT_VARS: ${{ inputs.vars }}
         INPUT_SECRETS: ${{ inputs.secrets }}
         INPUT_CONFIG_FILE: ${{ inputs.config_file }}
-      run: poetry -C ${{ inputs.pyproject_path }} run firestarter ${{ inputs.workflow }}
+      run: poetry -C ${{ github.workspace }}/firestarter_workflows run firestarter ${{ inputs.workflow }}
       working-directory: ${{ inputs.working_directory }}
       shell: bash
