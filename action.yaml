@@ -29,10 +29,22 @@ inputs:
     description: 'The secrets to pass to the workflow (in toml format)'
     required: false
     default: ""
+  ref:
+    description: 'prefapp/firestarter-workflows repository ref'
+    required: true
+    default: 'main'
 
 runs:
   using: "composite"
   steps:
+  
+    - name: Checkout tools repo
+      uses: actions/checkout@v4
+        with:
+          repository: prefapp/firestarter-workflows
+          ref: '${{ inputs.ref }}'
+          path:  ${{ inputs.working_directory }}/firestarter_workflows
+  
     - uses: actions/setup-python@v5
       id: setup-python
       with:
@@ -56,5 +68,5 @@ runs:
         INPUT_SECRETS: ${{ inputs.secrets }}
         INPUT_CONFIG_FILE: ${{ inputs.config_file }}
       run: poetry -C ${{ inputs.pyproject_path }} run firestarter ${{ inputs.workflow }}
-      working-directory: ${{ inputs.working_directory }}
+      working-directory: ${{ inputs.working_directory }}/firestarter_workflows
       shell: bash
