@@ -33,6 +33,9 @@ inputs:
     description: 'prefapp/firestarter-workflows repository ref'
     required: true
     default: 'main'
+  base_paths:
+    description: 'Base paths used when creating the full path where to upload the image to'
+    required: true 
 
 runs:
   using: "composite"
@@ -66,6 +69,7 @@ runs:
         INPUT_VARS: ${{ inputs.vars }}
         INPUT_SECRETS: ${{ inputs.secrets }}
         INPUT_CONFIG_FILE: ${{ inputs.config_file }}
+        INPUT_BASE_PATHS: ${{ inputs.base_paths }}
       run: poetry -C ${{ github.workspace }}/firestarter_workflows run firestarter ${{ inputs.workflow }}
       working-directory: ${{ inputs.working_directory }}
       shell: bash
