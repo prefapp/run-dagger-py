@@ -17,10 +17,6 @@ inputs:
     description: 'The working directory to run the action in'
     required: false
     default: ${{ github.workspace }}
-  pyproject_path:
-    description: 'The path to the pyproject.toml file'
-    required: false
-    default: '.dagger'
   vars:
     description: 'The var arguments to pass to the workflow (in toml format)'
     required: false
@@ -29,9 +25,13 @@ inputs:
     description: 'The secrets to pass to the workflow (in toml format)'
     required: false
     default: ""
-  ref:
-    description: 'prefapp/firestarter-workflows repository ref'
-    required: true
+  workflows_repository:
+    description: 'Repository from which to download workflows'
+    required: false
+    default: 'prefapp/firestarter-workflows'
+  workflows_repository_ref:
+    description: 'Workflows repository ref'
+    required: false
     default: 'main'
 
 runs:
@@ -41,12 +41,12 @@ runs:
     - name: Checkout tools repo
       uses: actions/checkout@v4
       with:
-        repository: prefapp/firestarter-workflows
-        ref: '${{ inputs.ref }}'
-        path: firestarter_workflows
+        repository: ${{ inputs.workflows_repository }}
+        ref: '${{ inputs.workflows_repository_ref }}'
+        path: workflows
 
     - name: Install poetry
-      run: pipx install poetry==1.8.2
+      run: pipx install poetry==1.8.3
       shell: bash
   
     - uses: actions/setup-python@v5
@@ -55,10 +55,10 @@ runs:
         cache: 'poetry'
         python-version: '${{ inputs.python_version }}'
 
-    - run: poetry install -C ${{ github.workspace }}/firestarter_workflows --extras=${{ inputs.workflow }}
+    - run: poetry install -C ${{ github.workspace }}/workflows --extras=${{ inputs.workflow }}
       shell: bash
 
-    - run: poetry env info -C ${{ github.workspace }}/firestarter_workflows
+    - run: poetry env info -C ${{ github.workspace }}/workflows
       shell: bash
 
     - id: run-dagger
@@ -66,6 +66,6 @@ runs:
         INPUT_VARS: ${{ inputs.vars }}
         INPUT_SECRETS: ${{ inputs.secrets }}
         INPUT_CONFIG_FILE: ${{ inputs.config_file }}
-      run: poetry -C ${{ github.workspace }}/firestarter_workflows run firestarter ${{ inputs.workflow }}
+      run: poetry -C ${{ github.workspace }}/workflows run firestarter ${{ inputs.workflow }}
       working-directory: ${{ inputs.working_directory }}
       shell: bash
