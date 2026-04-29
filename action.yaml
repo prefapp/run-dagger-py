@@ -71,6 +71,6 @@ runs:
         INPUT_SECRETS: ${{ inputs.secrets }}
         INPUT_ADDITIONAL_BUILD_ARGS: ${{ inputs.additional_build_args }}
         INPUT_CONFIG_FILE: ${{ inputs.config_file }}
-      run: poetry -C ${{ github.workspace }}/workflows run firestarter ${{ inputs.workflow }} --vars='{VAR_LINE="test var line"}' --secrets='{COMMAND_LINE="test value"}' --additional_build_args='{CMD_BA="test cmd ba"}'
+      run: poetry -C ${{ github.workspace }}/workflows run firestarter ${{ inputs.workflow }}
       working-directory: ${{ inputs.working_directory }}
       shell: bash
