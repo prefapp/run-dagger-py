@@ -26,10 +26,10 @@ jobs:
     steps:
       - name: Checkout repository
         ref: ${{ github.event.inputs.from }}
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
       
       - name: Checkout repository to get config file
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           path: config
 

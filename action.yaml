@@ -1,63 +1,62 @@
-name: 'run-dagger-py'
-description: 'Action to run a dagger workflow, using the python SDK'
+name: "run-dagger-py"
+description: "Action to run a dagger workflow, using the python SDK"
 inputs:
   workflow:
-    description: 'The workflow script to run, as specified in [tool.poetry.scripts]'
+    description: "The workflow script to run, as specified in [tool.poetry.scripts]"
     required: true
-    default: 'main'
+    default: "main"
   config_file:
-    description: 'The firestarter config file path'
+    description: "The firestarter config file path"
     required: true
-    default: '.dagger/firestarter.yml'
+    default: ".dagger/firestarter.yml"
   python_version:
-    description: 'The python version to use'
+    description: "The python version to use"
     required: false
-    default: '3.11'
+    default: "3.11"
   working_directory:
-    description: 'The working directory to run the action in'
+    description: "The working directory to run the action in"
     required: false
     default: ${{ github.workspace }}
   vars:
-    description: 'The var arguments to pass to the workflow (in toml format)'
+    description: "The var arguments to pass to the workflow (in toml format)"
     required: false
     default: ""
   secrets:
-    description: 'The secrets to pass to the workflow (in toml format)'
+    description: "The secrets to pass to the workflow (in toml format)"
     required: false
     default: ""
   additional_build_args:
-    description: 'Additional build_args to pass to the workflow (in toml format)'
+    description: "Additional build_args to pass to the workflow (in toml format)"
     required: false
     default: ""
   workflows_repository:
-    description: 'Repository from which to download workflows'
+    description: "Repository from which to download workflows"
     required: false
-    default: 'prefapp/firestarter-workflows'
+    default: "prefapp/firestarter-workflows"
   workflows_repository_ref:
-    description: 'Workflows repository ref'
+    description: "Workflows repository ref"
     required: false
-    default: 'main'
+    default: "main"
 
 runs:
   using: "composite"
   steps:
-  
     - name: Checkout tools repo
-      uses: actions/checkout@v4
+      uses: actions/checkout@v6
       with:
         repository: ${{ inputs.workflows_repository }}
-        ref: '${{ inputs.workflows_repository_ref }}'
+        ref: "${{ inputs.workflows_repository_ref }}"
         path: workflows
 
     - name: Install poetry
       run: pipx install poetry==1.8.3
       shell: bash
-  
-    - uses: actions/setup-python@v5
+
+    - uses: actions/setup-python@v6
       id: setup-python
       with:
-        cache: 'poetry'
-        python-version: '${{ inputs.python_version }}'
+        cache: "poetry"
+        python-version: "${{ inputs.python_version }}"
 
     - run: poetry install -C ${{ github.workspace }}/workflows --extras=${{ inputs.workflow }}
       shell: bash
