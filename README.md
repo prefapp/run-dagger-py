@@ -7,7 +7,7 @@ See [docs](docs/index.md) for more details.
 
 - `workflow`: Name of the workflow to run, must match the name of the python package (without the `firestarter.workflows.` prefix), for example: `pr_verify`. **(required)**
 - `config_file`: The firestarter config file path. Default is `.dagger/firestarter.yml`. **(required)**
-- `python_version`: The Python version to use. Default is `3.11`. **Needs to be >= 3.10**. **(optional)**
+- `python_version`: The Python version to use. Default is `3.14`. **Needs to be >= 3.14**. **(optional)**
 - `working_directory`: The working directory to run the action in. Default is `${{ github.workspace }}`. **(optional)**
 - `vars`: The var arguments to pass to the workflow (in [Key/Value TOML format](https://toml.io/en/v1.0.0#keyvalue-pair)). Default is `""`. **(optional)**
 - `secrets`: The secrets to pass to the workflow (in [Key/Value TOML format](https://toml.io/en/v1.0.0#keyvalue-pair)). Default is `""`. **(optional)**
@@ -38,7 +38,7 @@ jobs:
         with:
           workflow: 'build-imagews'
           config_file: '../config/.github/build_images.yml'
-          python_version: '3.11'
+          python_version: '3.14'
           working_directory: ${{ github.workspace }}
           vars: |
             YOUR_VARS_IN_TOML_FORMAT
@@ -52,7 +52,7 @@ jobs:
 
 - Checkout tools repo: Uses actions/checkout@v4 to checkout the workflows repository.
 - Install poetry: Installs Poetry version 1.8.3 using pipx.
-- Setup Python: Uses actions/setup-python@v5 to setup Python with the specified version and cache.
+- Setup Python: Uses actions/setup-python@v7 to setup Python with the specified version and cache.
 - Install dependencies: Installs the dependencies using Poetry.
 - Run Dagger workflow: Runs the specified Dagger workflow using the provided inputs.
 

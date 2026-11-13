@@ -12,7 +12,7 @@ inputs:
   python_version:
     description: "The python version to use"
     required: false
-    default: "3.11"
+    default: "3.14"
   working_directory:
     description: "The working directory to run the action in"
     required: false
@@ -52,7 +52,7 @@ runs:
       run: pipx install poetry==1.8.3
       shell: bash
 
-    - uses: actions/setup-python@v6
+    - uses: actions/setup-python@v7
       id: setup-python
       with:
         cache: "poetry"
